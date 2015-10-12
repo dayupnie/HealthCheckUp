@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="theme">#CD0000</color>    
+	<color name="simple_gray">#D1D1D1</color>
+	<color name="white">#FFFFFF</color>
+</resources>
