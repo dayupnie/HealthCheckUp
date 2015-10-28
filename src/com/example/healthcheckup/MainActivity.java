@@ -16,6 +16,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.text.BoringLayout.Metrics;
 import android.util.DisplayMetrics;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
@@ -42,6 +45,26 @@ public class MainActivity extends FragmentActivity implements  OnClickListener{
 //		initImage();
 		initViews();
 	}
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		MenuInflater menuInflater = getMenuInflater();
+		menuInflater.inflate(R.menu.options_menu, menu);
+		return true;
+	}
+//	@Override
+//	public boolean onOptionsItemSelected(MenuItem item) {
+//		// TODO Auto-generated method stub
+//		switch(item.getItemId()){
+//		case R.id.menu_first:
+//			break;
+//		case R.id.menu_second:
+//			break;
+//		case R.id.menu_third:
+//			break;
+//		}
+//		return super.onOptionsItemSelected(item);
+//	}
 	public void initTextView(){
 		tvHome = (TextView) findViewById(R.id.tv_home);
 		tvPerson = (TextView) findViewById(R.id.tv_person);
@@ -83,14 +106,14 @@ public class MainActivity extends FragmentActivity implements  OnClickListener{
 		viewPager.setAdapter(pagerAdapter);
 		viewPager.setCurrentItem(0);//当前显示第一页
 		viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-			int single = offSet*2+cursorwidth;
+//			int single = offSet*2+cursorwidth;
 			@Override
 			public void onPageSelected(int arg0) {
 				// TODO Auto-generated method stub
-				Animation animation = new TranslateAnimation(single*currentIndex, single*arg0, 0, 0);
-				animation.setFillAfter(true);
-				animation.setDuration(300);
-				imgCursor.startAnimation(animation);
+//				Animation animation = new TranslateAnimation(single*currentIndex, single*arg0, 0, 0);
+//				animation.setFillAfter(true);
+//				animation.setDuration(300);
+//				imgCursor.startAnimation(animation);
 				tvHome.setTextColor(getResources().getColor(R.color.simple_gray));
 				tvPerson.setTextColor(getResources().getColor(R.color.simple_gray));
 				switch(arg0){

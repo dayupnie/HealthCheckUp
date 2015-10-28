@@ -4,4 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/two" >
+    <TextView 
+        android:id="@+id/home_tv_goto"
+        android:layout_width="40dip"
+        android:layout_height="40dip"
+        android:text="连接"
+        android:textColor="@color/white"
+        android:gravity="center" />
 </LinearLayout>
