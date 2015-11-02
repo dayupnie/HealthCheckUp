@@ -1,6 +1,7 @@
 package com.example.fragment;
 
 import com.example.healthcheckup.R;
+import com.example.tool.BlueTooth;
 import com.example.tool.BlueToothConnection;
 
 import android.content.Intent;
