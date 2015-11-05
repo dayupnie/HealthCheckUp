@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import android.bluetooth.BluetoothSocket;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 
 public class ConnectedThread extends Thread {
@@ -15,8 +17,6 @@ public class ConnectedThread extends Thread {
 		mSocket = socket;
 		InputStream tmpIn = null;
 		OutputStream tmpOut = null;
-		// Get the input and output streams, using temp objects because
-		// member streams are final
 		try {
 		tmpIn = socket.getInputStream();
 		tmpOut = socket.getOutputStream();
@@ -24,27 +24,30 @@ public class ConnectedThread extends Thread {
 		mInStream = tmpIn;
 		mOutStream = tmpOut;
 	}
-	
+	private Handler handler = new Handler(){
+		public void handleMessage(android.os.Message msg){
+			super.handleMessage(msg);
+		}
+	};
 	public void run() {
-		byte[] buffer = new byte[1024]; // buffer store for the stream
-		int bytes; // bytes returned from read()
-		// Keep listening to the InputStream until an exception occurs
+		byte[] buffer = new byte[1024]; 
+		int bytes; 
 		while (true) {
+			Log.d("read","run");
 			try {
-				// Read from the InputStream
 				bytes = mInStream.read(buffer);
-				// Send the obtained bytes to the UI activity
-				// mHandler.obtainMessage(MESSAGE_READ, bytes, -1, buffer)
-				// .sendToTarget();
-				String str= new String(buffer,"utf-8");
-				str=str.substring(0,bytes);
-				Log.e("read",str);
+				String str = new String(buffer,"utf-8");
+				str = str.substring(0,bytes);
+				Log.d("read",str);
+				Message msg = new Message();
+				msg.obj = str;
+				handler.sendMessage(msg);
 				} catch (IOException e) {
+					Log.d("miss","no data");
 					break;
 				}
 			}
 		}
-/* Call this from the main activity to send data to the remote device */
 	public void write(byte[] bytes) {
 		try {
 		mOutStream.write(bytes);
@@ -52,7 +55,6 @@ public class ConnectedThread extends Thread {
 			
 		}
 	}
-/* Call this from the main activity to shutdown the connection */
 	public void cancel() {
 		try {
 			mSocket.close();

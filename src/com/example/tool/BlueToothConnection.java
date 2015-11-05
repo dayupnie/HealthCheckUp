@@ -37,11 +37,13 @@ public class BlueToothConnection extends Activity {
 	private BluetoothAdapter mBluetoothAdapter;
 	private TextView tvDevices;
 	private Button btSearch;
+	private Button btLink;
 	private BluetoothDevice device;
 	private BluetoothDevice remoteDevice;
 	private BluetoothSocket btSocket;
-	private final String BLUETOOTH_ADDRESS = "24:FD:52:21:85:37";
-//	private final String BLUETOOTH_ADDRESS = "30:15:01:27:06:61";
+	private ConnectedThread connectedThread;
+//	private final String BLUETOOTH_ADDRESS = "24:FD:52:21:85:37";
+	private final String BLUETOOTH_ADDRESS = "00:11:35:89:80:40";
 //	private final String BLUETOOTH_NAME = "HC-05";
 	private final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");	
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,15 +64,18 @@ public class BlueToothConnection extends Activity {
 		}
 
 		//注册用于已搜索到的蓝牙设备的Receiver
-		IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);//�ҵ��豸�Ĺ㲥
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(BluetoothDevice.ACTION_FOUND);//发现广播
+		filter.addAction(BluetoothDevice.ACTION_BOND_STATE_CHANGED);//设备连接状态改变
+		filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
+//		filter.addAction(android.bluetooth.BluetoothDevice.ACTION_PAIRING_REQUEST);//自动匹配
 		this.registerReceiver(receiver, filter);
-		//注册搜索完成时的Receiver
-		filter = new IntentFilter(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);//ȫ��������
-		this.registerReceiver(receiver, filter); 
+
 	}
 	public void initViews(){
 		tvDevices = (TextView) findViewById(R.id.search_bluetooth);
 		btSearch = (Button) findViewById(R.id.search);
+		btLink = (Button) findViewById(R.id.link);
 		btSearch.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -78,6 +83,21 @@ public class BlueToothConnection extends Activity {
 				// TODO Auto-generated method stub
 				clickSearch();
 				setProgressBarVisibility(true);				
+			}
+		});
+		//连接之后
+		btLink.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Toast.makeText(getApplication(), "点击成功", Toast.LENGTH_SHORT).show();
+					try {
+						connectDevice();
+					} catch (IllegalArgumentException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 			}
 		});
 	}
@@ -100,109 +120,78 @@ public class BlueToothConnection extends Activity {
 				device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
 				if(device.getAddress().equals(BLUETOOTH_ADDRESS)){
 					tvDevices.append(device.getName()+":"+device.getAddress()+"\n");
+					remoteDevice = device;
 					Toast.makeText(getApplication(), "搜索完成~", Toast.LENGTH_SHORT).show();
+					if(BluetoothDevice.ACTION_BOND_STATE_CHANGED.equals(action)){
+						switch(device.getBondState()){
+						case BluetoothDevice.BOND_BONDING:
+							Log.d("BlueToothTestActivity", "正在配对...");
+							break;
+						case BluetoothDevice.BOND_BONDED:
+							Log.d("BlueToothTestActivity", "完成配对");
+							break;
+						case BluetoothDevice.BOND_NONE:
+							Log.d("BlueToothTestActivity", "取消配对");
+							break;
+						}
+					}else if(BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)){
+						mBluetoothAdapter.cancelDiscovery();//取消搜索
+					}
 				}
-				ConnectThread connectThread = new ConnectThread(device);
-				connectThread.run();
 			}
-//			//搜索完成
-//			else if(BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)){
-//				setProgressBarVisibility(false);
-//				Toast.makeText(getApplication(), "搜索完成~", Toast.LENGTH_SHORT).show();
-//				ConnectThread connectThread = new ConnectThread(device);
-//				connectThread.run();
-//			}
 		}
 	};
-	public class ConnectThread extends Thread {
-		private final BluetoothSocket mSocket;
-		private final BluetoothDevice mDevice;
-		public ConnectThread(BluetoothDevice device) {
-		// Use a temporary object that is later assigned to mmSocket,
-		// because mmSocket is final
-		BluetoothSocket tmp = null;
-		mDevice = device;
-		// Get a BluetoothSocket to connect with the given BluetoothDevice
+	/**
+	 * 建立连接通信
+	 */
+	public void connectDevice(){
 		try {
-			tmp = device.createRfcommSocketToServiceRecord(MY_UUID);
-		} catch (IOException e) { }
-			mSocket = tmp;
+			btSocket = remoteDevice.createRfcommSocketToServiceRecord(MY_UUID);
+			Log.d("TAG", "连接成功");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			Log.d("TAG", "连接失败");
 		}
-		public void run() {
-			//取消搜索
-			mBluetoothAdapter.cancelDiscovery();
-			connectDevice();
-		try {
-			mSocket.connect();
-//			ConnectedThread ced = new ConnectedThread(mSocket);
-//			ced.start();
-		}
-		catch (Exception e) {
-			Log.e("connect0e",e.toString());
-		//t1.append("\r\n 连接失败001" );
-		// Unable to connect; close the socket and get out
-		try {
-			mSocket.close();
-		}
-		catch (Exception e1)
-		{
-		Log.e("close",e1.toString());
-		}
-		}
-		// Do work to manage the connection (in a separate thread)
-		// manageConnectedSocket(mmSocket);
-		}
-		public void coDevice(){
-//			new Thread(){
-//				public void run(){
-			if(device.getBondState() == BluetoothDevice.BOND_NONE){
+		if(remoteDevice.getBondState() != BluetoothDevice.BOND_BONDED){
+			Toast.makeText(getApplication(), "not~~", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplication(), "connecting...", Toast.LENGTH_SHORT).show();
+				Method method = null;
 				try {
-					Method method = device.getClass().getMethod("createBond");
-					Log.d("BlueToothTestActivity", "开始配对"); 
-					boolean flag = (boolean) method.invoke(device);
-					if(flag){
-						Toast.makeText(getApplication(), "配对了？？~", Toast.LENGTH_SHORT).show();
-					}
-				} catch (NoSuchMethodException e) {
+					method = BluetoothDevice.class.getMethod("createBond");
+				} catch (NoSuchMethodException e1) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
+					e1.printStackTrace();
+				}
+				Log.e("TAG", "开始配对");
+				try {
+					method.invoke(remoteDevice);
+				} catch (IllegalAccessException e1) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalArgumentException e) {
+					e1.printStackTrace();
+				} catch (IllegalArgumentException e1) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
+					e1.printStackTrace();
+				} catch (InvocationTargetException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				try {
+					btSocket.connect();
+				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}
-//				}
-//			}
+		} 
+		if(remoteDevice.getBondState() == BluetoothDevice.BOND_BONDED){
+			connectedThread = new ConnectedThread(btSocket);
+			connectedThread.start();
+			Log.e("TAG", "send message");
 		}
 	}
-	public void connectDevice(){
-				if(device.getBondState() == BluetoothDevice.BOND_NONE){
-					try {
-						Method method = device.getClass().getMethod("createBond");
-						Log.d("TAG", "开始配对"); 
-						boolean flag = (boolean) method.invoke(device);
-						if(flag){
-							Toast.makeText(getApplication(), "配对了？？~", Toast.LENGTH_SHORT).show();
-						}
-					} catch (NoSuchMethodException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IllegalAccessException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IllegalArgumentException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (InvocationTargetException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		unregisterReceiver(receiver);
+		super.onDestroy();
 	}
 }

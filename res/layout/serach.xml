@@ -9,7 +9,13 @@
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:text="search"
-         android:onClick="clickSearch()"/>
+         />
+     <Button 
+         android:id="@+id/link"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="link"
+         />
      <TextView 
          android:id="@+id/search_bluetooth"
          android:layout_width="wrap_content"
