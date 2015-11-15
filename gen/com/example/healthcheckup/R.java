@@ -9,49 +9,136 @@ package com.example.healthcheckup;
 
 public final class R {
     public static final class attr {
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int borderRadius=0x7f010000;
+        /** <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>circle</code></td><td>0</td><td></td></tr>
+<tr><td><code>round</code></td><td>1</td><td></td></tr>
+</table>
+         */
+        public static final int type=0x7f010001;
     }
     public static final class color {
-        public static final int simple_gray=0x7f040001;
-        public static final int theme=0x7f040000;
-        public static final int white=0x7f040002;
+        public static final int black=0x7f050003;
+        public static final int blue=0x7f050004;
+        public static final int dialog_bg=0x7f05000e;
+        public static final int fill=0x7f050012;
+        public static final int gray=0x7f050006;
+        public static final int green=0x7f050008;
+        public static final int lightbule=0x7f050005;
+        public static final int mid_gray=0x7f05000f;
+        public static final int orange=0x7f05000a;
+        public static final int pink=0x7f050007;
+        public static final int purple=0x7f050009;
+        public static final int red=0x7f05000c;
+        public static final int simple_black=0x7f050013;
+        public static final int simple_font=0x7f050015;
+        public static final int simple_gray=0x7f050001;
+        public static final int simple_theme=0x7f050014;
+        public static final int theme=0x7f050000;
+        public static final int themecolor=0x7f050010;
+        public static final int themegray=0x7f050011;
+        public static final int transparent=0x7f05000d;
+        public static final int white=0x7f050002;
+        public static final int yellow=0x7f05000b;
     }
     public static final class drawable {
         public static final int cursor=0x7f020000;
         public static final int ic_launcher=0x7f020001;
-        public static final int one=0x7f020002;
-        public static final int round_white=0x7f020003;
-        public static final int two=0x7f020004;
-        public static final int viewpage_bottomline=0x7f020005;
+        public static final int install=0x7f020002;
+        public static final int listview_shape=0x7f020003;
+        public static final int one=0x7f020004;
+        public static final int press_change=0x7f020005;
+        public static final int right_arrow=0x7f020006;
+        public static final int round_blue=0x7f020007;
+        public static final int round_green=0x7f020008;
+        public static final int round_ligthtblue=0x7f020009;
+        public static final int round_midgray=0x7f02000a;
+        public static final int round_orange=0x7f02000b;
+        public static final int round_pink=0x7f02000c;
+        public static final int round_purple=0x7f02000d;
+        public static final int round_red=0x7f02000e;
+        public static final int round_themecolor=0x7f02000f;
+        public static final int round_white=0x7f020010;
+        public static final int round_yellow=0x7f020011;
+        public static final int shape_rectangle=0x7f020012;
+        public static final int three=0x7f020013;
+        public static final int two=0x7f020014;
+        public static final int viewpage_bottomline=0x7f020015;
     }
     public static final class id {
-        public static final int home_tv_goto=0x7f080004;
-        public static final int img_cursor=0x7f080002;
-        public static final int link=0x7f080007;
-        public static final int menu_first=0x7f080009;
-        public static final int menu_second=0x7f08000a;
-        public static final int menu_third=0x7f08000b;
-        public static final int person_unlogin_btn_turnlogin=0x7f080005;
-        public static final int search=0x7f080006;
-        public static final int search_bluetooth=0x7f080008;
-        public static final int tv_home=0x7f080000;
-        public static final int tv_person=0x7f080001;
-        public static final int viewpager=0x7f080003;
+        public static final int circle=0x7f040000;
+        public static final int data_bloodPress=0x7f04000c;
+        public static final int data_fat=0x7f040010;
+        public static final int data_heartRate=0x7f04000d;
+        public static final int data_impedance=0x7f04000f;
+        public static final int data_pulse=0x7f04000e;
+        public static final int data_weight=0x7f04000b;
+        public static final int home_bloodpress=0x7f040009;
+        public static final int home_heartrate=0x7f04000a;
+        public static final int home_tv_goto=0x7f040007;
+        public static final int home_weight=0x7f040008;
+        public static final int img_cursor=0x7f040005;
+        public static final int link=0x7f040022;
+        public static final int menu_first=0x7f040024;
+        public static final int menu_second=0x7f040025;
+        public static final int menu_third=0x7f040026;
+        public static final int person_aboutUs=0x7f04001d;
+        public static final int person_aleterInfo=0x7f040015;
+        public static final int person_aleterPassword=0x7f040017;
+        public static final int person_bt_eidt=0x7f040014;
+        public static final int person_exit=0x7f04001f;
+        public static final int person_feedBack=0x7f040019;
+        public static final int person_img=0x7f040016;
+        public static final int person_img1=0x7f040018;
+        public static final int person_img2=0x7f04001a;
+        public static final int person_img3=0x7f04001c;
+        public static final int person_img4=0x7f04001e;
+        public static final int person_img_portrait=0x7f040013;
+        public static final int person_rl_title=0x7f040011;
+        public static final int person_rl_userpic=0x7f040012;
+        public static final int person_unlogin_btn_turnlogin=0x7f040020;
+        public static final int person_updateVersion=0x7f04001b;
+        public static final int round=0x7f040001;
+        public static final int search=0x7f040021;
+        public static final int search_bluetooth=0x7f040023;
+        public static final int tv_data=0x7f040003;
+        public static final int tv_home=0x7f040002;
+        public static final int tv_person=0x7f040004;
+        public static final int viewpager=0x7f040006;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
-        public static final int home=0x7f030001;
-        public static final int person=0x7f030002;
-        public static final int person_unlogin=0x7f030003;
-        public static final int serach=0x7f030004;
+        public static final int bloodpress=0x7f030001;
+        public static final int data=0x7f030002;
+        public static final int heartrate=0x7f030003;
+        public static final int home=0x7f030004;
+        public static final int person=0x7f030005;
+        public static final int person_unlogin=0x7f030006;
+        public static final int serach=0x7f030007;
+        public static final int testweight=0x7f030008;
     }
     public static final class menu {
-        public static final int options_menu=0x7f070000;
+        public static final int options_menu=0x7f080000;
     }
     public static final class string {
-        public static final int app_name=0x7f050000;
-        public static final int ble_not_supported=0x7f050002;
-        public static final int error_bluetooth_not_supported=0x7f050003;
-        public static final int hello_world=0x7f050001;
+        public static final int app_name=0x7f060000;
+        public static final int ble_not_supported=0x7f060002;
+        public static final int error_bluetooth_not_supported=0x7f060003;
+        public static final int hello_world=0x7f060001;
     }
     public static final class style {
         /** 
@@ -66,6 +153,56 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f060000;
+        public static final int AppBaseTheme=0x7f070000;
     }
+    public static final class styleable {
+        /** Attributes that can be used with a RoundImageViewByXfermode.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #RoundImageViewByXfermode_borderRadius com.example.healthcheckup:borderRadius}</code></td><td></td></tr>
+           <tr><td><code>{@link #RoundImageViewByXfermode_type com.example.healthcheckup:type}</code></td><td></td></tr>
+           </table>
+           @see #RoundImageViewByXfermode_borderRadius
+           @see #RoundImageViewByXfermode_type
+         */
+        public static final int[] RoundImageViewByXfermode = {
+            0x7f010000, 0x7f010001
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.example.healthcheckup.R.attr#borderRadius}
+          attribute's value can be found in the {@link #RoundImageViewByXfermode} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.example.healthcheckup:borderRadius
+        */
+        public static final int RoundImageViewByXfermode_borderRadius = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.example.healthcheckup.R.attr#type}
+          attribute's value can be found in the {@link #RoundImageViewByXfermode} array.
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>circle</code></td><td>0</td><td></td></tr>
+<tr><td><code>round</code></td><td>1</td><td></td></tr>
+</table>
+          @attr name com.example.healthcheckup:type
+        */
+        public static final int RoundImageViewByXfermode_type = 1;
+    };
 }

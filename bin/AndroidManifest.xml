@@ -24,5 +24,6 @@
             </intent-filter>
         </activity>
          <activity android:name="com.example.tool.BlueToothConnection"></activity>
+         <activity android:name="TestWeightActivity"></activity>
          </application>
 </manifest>

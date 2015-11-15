@@ -3,6 +3,7 @@ package com.example.healthcheckup;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.fragment.DataFragment;
 import com.example.fragment.HomeFragment;
 import com.example.fragment.PersonFragment;
 
@@ -28,6 +29,7 @@ import android.widget.TextView;
 
 public class MainActivity extends FragmentActivity implements  OnClickListener{
 	private TextView tvHome;
+	private TextView tvData;
 	private TextView tvPerson;
 	private ImageView imgCursor;
 	private ViewPager viewPager;
@@ -52,24 +54,13 @@ public class MainActivity extends FragmentActivity implements  OnClickListener{
 		menuInflater.inflate(R.menu.options_menu, menu);
 		return true;
 	}
-//	@Override
-//	public boolean onOptionsItemSelected(MenuItem item) {
-//		// TODO Auto-generated method stub
-//		switch(item.getItemId()){
-//		case R.id.menu_first:
-//			break;
-//		case R.id.menu_second:
-//			break;
-//		case R.id.menu_third:
-//			break;
-//		}
-//		return super.onOptionsItemSelected(item);
-//	}
 	public void initTextView(){
 		tvHome = (TextView) findViewById(R.id.tv_home);
+		tvData = (TextView) findViewById(R.id.tv_data);
 		tvPerson = (TextView) findViewById(R.id.tv_person);
 		tvHome.setOnClickListener(new TvOnClickListener(0));
-		tvPerson.setOnClickListener(new TvOnClickListener(1));
+		tvData.setOnClickListener(new TvOnClickListener(1));
+		tvPerson.setOnClickListener(new TvOnClickListener(2));
 	}
 	public class TvOnClickListener implements View.OnClickListener{
 		private int index = 0;
@@ -100,11 +91,13 @@ public class MainActivity extends FragmentActivity implements  OnClickListener{
 		viewPager = (ViewPager) findViewById(R.id.viewpager);
 		fragments = new ArrayList<Fragment>();
 		fragments.add(new HomeFragment());
+		fragments.add(new DataFragment());
 		fragments.add(new PersonFragment());
 		
 		pagerAdapter = new com.example.view.PagerAdapter(getSupportFragmentManager(), (ArrayList<Fragment>) fragments);
 		viewPager.setAdapter(pagerAdapter);
 		viewPager.setCurrentItem(0);//当前显示第一页
+		tvHome.setTextColor(getResources().getColor(R.color.white));
 		viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 //			int single = offSet*2+cursorwidth;
 			@Override
@@ -114,13 +107,17 @@ public class MainActivity extends FragmentActivity implements  OnClickListener{
 //				animation.setFillAfter(true);
 //				animation.setDuration(300);
 //				imgCursor.startAnimation(animation);
-				tvHome.setTextColor(getResources().getColor(R.color.simple_gray));
-				tvPerson.setTextColor(getResources().getColor(R.color.simple_gray));
+				tvHome.setTextColor(getResources().getColor(R.color.simple_font));
+				tvData.setTextColor(getResources().getColor(R.color.simple_font));
+				tvPerson.setTextColor(getResources().getColor(R.color.simple_font));
 				switch(arg0){
 				case 0:
 					tvHome.setTextColor(getResources().getColor(R.color.white));
 					break;
 				case 1:
+					tvData.setTextColor(getResources().getColor(R.color.white));
+					break;
+				case 2:
 					tvPerson.setTextColor(getResources().getColor(R.color.white));
 					break;
 				}

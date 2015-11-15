@@ -53,7 +53,7 @@ public class BlueToothConnection extends Activity {
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);	
 		setContentView(R.layout.serach);
 		initViews();
-		
+		//打开蓝牙
 		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();//得到本地默认的bluetoothadapter
 		//提示是否打开蓝牙
 		if(mBluetoothAdapter!=null){
@@ -70,7 +70,6 @@ public class BlueToothConnection extends Activity {
 		filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
 //		filter.addAction(android.bluetooth.BluetoothDevice.ACTION_PAIRING_REQUEST);//自动匹配
 		this.registerReceiver(receiver, filter);
-
 	}
 	public void initViews(){
 		tvDevices = (TextView) findViewById(R.id.search_bluetooth);
@@ -102,7 +101,6 @@ public class BlueToothConnection extends Activity {
 		});
 	}
 	public void clickSearch(){
-		setProgressBarIndeterminateVisibility(true);
 		Toast.makeText(getApplication(), "正在搜索~", Toast.LENGTH_SHORT).show();
 		if(mBluetoothAdapter.isDiscovering()){
 			mBluetoothAdapter.cancelDiscovery();
@@ -155,39 +153,44 @@ public class BlueToothConnection extends Activity {
 		if(remoteDevice.getBondState() != BluetoothDevice.BOND_BONDED){
 			Toast.makeText(getApplication(), "not~~", Toast.LENGTH_SHORT).show();
 				Toast.makeText(getApplication(), "connecting...", Toast.LENGTH_SHORT).show();
-				Method method = null;
-				try {
-					method = BluetoothDevice.class.getMethod("createBond");
-				} catch (NoSuchMethodException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				Log.e("TAG", "开始配对");
-				try {
-					method.invoke(remoteDevice);
-				} catch (IllegalAccessException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IllegalArgumentException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (InvocationTargetException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+//				Method method = null;
+//				try {
+//					method = BluetoothDevice.class.getMethod("createBond");
+//				} catch (NoSuchMethodException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
+//				Log.e("TAG", "开始配对");
+//				try {
+//					method.invoke(remoteDevice);
+//				} catch (IllegalAccessException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				} catch (IllegalArgumentException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				} catch (InvocationTargetException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
 				try {
 					btSocket.connect();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				Log.e("TAG", "bounded");
+				Log.e("TAG", "配对成功");
+				connectedThread = new ConnectedThread(btSocket, handler);
+				connectedThread.start();
 		} 
-		if(remoteDevice.getBondState() == BluetoothDevice.BOND_BONDED){
-			connectedThread = new ConnectedThread(btSocket);
-			connectedThread.start();
-			Log.e("TAG", "send message");
-		}
+		
 	}
+	private Handler handler = new Handler(){
+		public void handleMessage(android.os.Message msg){
+			super.handleMessage(msg);
+		}
+	};
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
