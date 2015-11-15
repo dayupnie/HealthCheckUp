@@ -81,13 +81,13 @@ public class Db extends SQLiteOpenHelper {
 		
 	}
 
-private SQLiteDatabase getDB(){
-	SQLiteDatabase db =getWritableDatabase();
-	if(db == null){
-		throw new RuntimeException("初始化数据库失败");
+	private SQLiteDatabase getDB(){
+		SQLiteDatabase db =getWritableDatabase();
+		if(db == null){
+			throw new RuntimeException("初始化数据库失败");
+		}
+		return db;	
 	}
-	return db;	
-}
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		

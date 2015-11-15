@@ -59,12 +59,21 @@
 	     android:orientation="horizontal"
 		 android:background="@drawable/press_change"
 		 >
+	       <ImageView
+	           android:id="@+id/person_ico"
+	           android:layout_width="wrap_content"
+	           android:layout_height="wrap_content"
+	           android:background="@drawable/alterinfo"
+	           android:contentDescription="image"
+	           android:layout_marginLeft="10dip"
+	           android:layout_marginTop="15dip"
+	            />
 	       <TextView 
 	           android:layout_width="wrap_content"
 	           android:layout_height="wrap_content"
 	           android:layout_weight="1"
 	           android:padding="10dip"
-	           android:textSize="20sp"
+	           android:textSize="18sp"
 	           android:textColor="@color/mid_gray"
 	           android:background="@null"
 	           android:text="修改资料"/>
@@ -75,7 +84,7 @@
 	           android:background="@drawable/right_arrow"
 	           android:contentDescription="image"
 	           android:layout_marginRight="20dip"
-	           android:layout_marginTop="20dip"
+	           android:layout_marginTop="15dip"
 	            />
 	       </LinearLayout>
  <!-- 自定义一个模块 -->
@@ -86,14 +95,23 @@
 	     android:orientation="horizontal"
 		 android:background="@drawable/press_change"
 	     >
-	     <TextView
+	       <ImageView
+	           android:id="@+id/person_ico1"
+	           android:layout_width="wrap_content"
+	           android:layout_height="wrap_content"
+	           android:background="@drawable/altertpassword"
+	           android:contentDescription="image"
+	           android:layout_marginLeft="10dip"
+	           android:layout_marginTop="15dip"
+	            />
+	     	     <TextView
 	         android:layout_width="wrap_content"
 	         android:layout_height="wrap_content"
 	         android:layout_weight="1"
 	         android:padding="10dip"
 	         android:text="更改密码"
 	         android:textColor="@color/mid_gray"
-	         android:textSize="20sp" />
+	         android:textSize="18sp" />
 
         <ImageView
             android:id="@+id/person_img1"
@@ -102,7 +120,7 @@
             android:background="@drawable/right_arrow"
             android:contentDescription="image"
             android:layout_marginRight="20dip"
-            android:layout_marginTop="20dip"
+            android:layout_marginTop="15dip"
              />
 	 </LinearLayout>
  <!-- 自定义一个模块 -->
@@ -113,12 +131,21 @@
 	     android:orientation="horizontal"
 		 android:background="@drawable/press_change"
 	     >
-        <TextView 
+	       <ImageView
+	           android:id="@+id/person_ico2"
+	           android:layout_width="wrap_content"
+	           android:layout_height="wrap_content"
+	           android:background="@drawable/feedback"
+	           android:contentDescription="image"
+	           android:layout_marginLeft="10dip"
+	           android:layout_marginTop="15dip"
+	            />
+	     <TextView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="10dip"
-            android:textSize="20sp"
+            android:textSize="18sp"
 	        android:textColor="@color/mid_gray"
             android:text="意见反馈"/>
         <ImageView
@@ -128,7 +155,7 @@
             android:background="@drawable/right_arrow"
             android:contentDescription="image"
             android:layout_marginRight="20dip"
-            android:layout_marginTop="20dip"
+            android:layout_marginTop="15dip"
              />
 	 </LinearLayout>
  <!-- 自定义一个模块 -->
@@ -139,12 +166,21 @@
 	     android:orientation="horizontal"
 		 android:background="@drawable/press_change"
 	     >
-        <TextView 
+	       <ImageView
+	           android:id="@+id/person_ico3"
+	           android:layout_width="wrap_content"
+	           android:layout_height="wrap_content"
+	           android:background="@drawable/update"
+	           android:contentDescription="image"
+	           android:layout_marginLeft="10dip"
+	           android:layout_marginTop="15dip"
+	            />
+	     <TextView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="10dip"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textColor="@color/mid_gray"
             android:text="版本更新"/>
         <ImageView
@@ -154,7 +190,7 @@
             android:background="@drawable/right_arrow"
             android:contentDescription="image"
             android:layout_marginRight="20dip"
-            android:layout_marginTop="20dip"
+            android:layout_marginTop="15dip"
              />
 	 </LinearLayout>
  <!-- 自定义一个模块 -->
@@ -165,12 +201,21 @@
 	     android:orientation="horizontal"
 		 android:background="@drawable/press_change"
 	     >
-        <TextView 
+	       <ImageView
+	           android:id="@+id/person_ico4"
+	           android:layout_width="wrap_content"
+	           android:layout_height="wrap_content"
+	           android:background="@drawable/aboutus"
+	           android:contentDescription="image"
+	           android:layout_marginLeft="10dip"
+	           android:layout_marginTop="15dip"
+	            />
+	     <TextView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="10dip"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textColor="@color/mid_gray"
             android:text="关于我们"/>
         <ImageView
@@ -180,7 +225,7 @@
             android:background="@drawable/right_arrow"
             android:contentDescription="image"
             android:layout_marginRight="20dip"
-            android:layout_marginTop="20dip"
+            android:layout_marginTop="15dip"
              />
 	 </LinearLayout>
 </LinearLayout>
